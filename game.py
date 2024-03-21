@@ -14,11 +14,11 @@ guessed_letters = []
 
 print("¡Bienvenido al juego de adivinanzas!")
 
-# Elección dificultad
-print("Antes de empezar debes seleccionar el nivel de dificultad. Si quieres fácil escriba '1', si quieres media '2' y si quieres difícil '3'.")
+# Elección de dificultad
+print("Antes de empezar a jugar debes elegir el nivel de dificultad. Si quieres nivel fácil escriba '1', si quieres nivel medio escriba '2' y si quieres nivel difícil escriba '3'.")
 num=input()
 while num not in ["1", "2", "3"]: 
-    print("Seleccionaste una opción no válida, intenta nuevamente")
+    print("Seleccionaste una opción no válida, por favor vuelva a escribir el nivel de preferencia.")
     num=input()
 num=int(num)
 print("Estoy pensando en una palabra. ¿Puedes adivinar cuál es?")
@@ -61,7 +61,7 @@ while failures < max_failures:
       word_displayed = "".join([letter if letter in guessed_letters else "_" for letter in secret_word])
 
     print(f"Palabra: {word_displayed}")
-    # Verificar si se ha adivinado la palabra completa
+    # Verificar si se ha adivinado la palabra completa y no llegó al límite de errores
     if word_displayed == secret_word and failures < max_failures:
         print(f"¡Felicidades! Has adivinado la palabra secreta: {secret_word}")
         break
