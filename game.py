@@ -28,8 +28,7 @@ for i in range(max_attempts):
         print("Ya has intentado con esa letra. Intenta con otra.")
         continue
     if not letter:
-        print ("No
-                has ingresado ninguna letra.")
+        print ("No has ingresado ninguna letra.")
         continue
 
     # Agregar la letra a la lista de letras adivinadas
