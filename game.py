@@ -1,7 +1,7 @@
 import random
 
 # Lista de palabras posibles
-words = ["python", "programación", "computadora", "código", "desarrollo", "inteligencia"]
+words = ["python", "programacion", "computadora", "codigo", "desarrollo", "inteligencia"]
 
 # Elegir una palabra al azar
 secret_word = random.choice(words)
@@ -13,8 +13,21 @@ max_failures = 10
 guessed_letters = []
 
 print("¡Bienvenido al juego de adivinanzas!")
+
+# Elección dificultad
+print("Antes de empezar debes seleccionar el nivel de dificultad. Si quieres fácil escriba '1', si quieres media '2' y si quieres difícil '3'.")
+num=input()
+while num not in ["1", "2", "3"]: 
+    print("Seleccionaste una opción no válida, intenta nuevamente")
+    num=input()
+num=int(num)
 print("Estoy pensando en una palabra. ¿Puedes adivinar cuál es?")
-word_displayed = "_" * len(secret_word)
+if num == 1:
+  word_displayed = "".join([letter if letter in guessed_letters or letter in "aeiou" else "_" for letter in secret_word])
+elif num == 2:
+  word_displayed= secret_word[0] + "_" * (len(secret_word)-2) + secret_word[-1]
+else:
+  word_displayed = "_" * len(secret_word)
 
 # Mostrar la palabra parcialmente adivinada
 print(f"Palabra: {word_displayed}")
@@ -33,28 +46,26 @@ while failures < max_failures:
 
     # Agregar la letra a la lista de letras adivinadas
     guessed_letters.append(letter)
-
-    # Verificar si la letra está en la palabra secreta
     if letter in secret_word:
         print("¡Bien hecho! La letra está en la palabra.")
     else:
         print("Lo siento, la letra no está en la palabra.")
         failures += 1
-    # Mostrar la palabra parcialmente adivinada
-    letters = []
-    for letter in secret_word:
-        if letter in guessed_letters:
-            letters.append(letter)
-        else:
-            letters.append("_")
-    word_displayed = "".join(letters)
-    print(f"Palabra: {word_displayed}")
 
+    # Mostrar la palabra parcialmente adivinada
+    if num == 1:
+      word_displayed = "".join([letter if letter in guessed_letters or letter in "aeiou" else "_" for letter in secret_word])
+    elif num == 2:
+      word_displayed = secret_word[0] + "".join(letter if letter in guessed_letters else "_" for letter in secret_word[1:-1:1]) + secret_word[-1]
+    else:
+      word_displayed = "".join([letter if letter in guessed_letters else "_" for letter in secret_word])
+
+    print(f"Palabra: {word_displayed}")
     # Verificar si se ha adivinado la palabra completa
-    if word_displayed == secret_word:
+    if word_displayed == secret_word and failures < max_failures:
         print(f"¡Felicidades! Has adivinado la palabra secreta: {secret_word}")
         break
-if failures>= max_failures:
+if failures >= max_failures:
     print(f"¡Oh no! Has alcanzado los {max_failures} errores.")
     print(f"La palabra secreta era: {secret_word}")
 
