@@ -27,6 +27,10 @@ for i in range(max_attempts):
     if letter in guessed_letters:
         print("Ya has intentado con esa letra. Intenta con otra.")
         continue
+    if not letter:
+        print ("No
+                has ingresado ninguna letra.")
+        continue
 
     # Agregar la letra a la lista de letras adivinadas
     guessed_letters.append(letter)
@@ -36,7 +40,6 @@ for i in range(max_attempts):
         print("¡Bien hecho! La letra está en la palabra.")
     else:
         print("Lo siento, la letra no está en la palabra.")
-
     # Mostrar la palabra parcialmente adivinada
     letters = []
     for letter in secret_word:
