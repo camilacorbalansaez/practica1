@@ -15,10 +15,10 @@ guessed_letters = []
 print("¡Bienvenido al juego de adivinanzas!")
 
 # Elección de dificultad
-print("Antes de empezar a jugar debes elegir el nivel de dificultad. Si quieres nivel fácil escriba '1', si quieres nivel medio escriba '2' y si quieres nivel difícil escriba '3'.")
+print("Antes de empezar a jugar debes elegir el nivel de dificultad. Si quieres nivel fácil escribe '1', si quieres nivel medio escribe '2' y si quieres nivel difícil escribe '3'.")
 num=input()
 while num not in ["1", "2", "3"]: 
-    print("Seleccionaste una opción no válida, por favor vuelva a escribir el nivel de preferencia.")
+    print("Has seleccionado una opción no válida, por favor vuelve a escribir el nivel de preferencia.")
     num=input()
 num=int(num)
 print("Estoy pensando en una palabra. ¿Puedes adivinar cuál es?")
@@ -33,10 +33,11 @@ else:
 print(f"Palabra: {word_displayed}")
 failures=0
 while failures < max_failures:
+    
     # Pedir al jugador que ingrese una letra
     letter = input("Ingresa una letra: ").lower()
 
-    # Verificar si la letra ya ha sido adivinada
+    # Verificar que sea una letra y, en caso de serlo, si ya ha sido adivinada 
     if letter in guessed_letters:
         print("Ya has intentado con esa letra. Intenta con otra.")
         continue
@@ -46,6 +47,8 @@ while failures < max_failures:
 
     # Agregar la letra a la lista de letras adivinadas
     guessed_letters.append(letter)
+
+    # Verificar si la letra está en la palabra secreta
     if letter in secret_word:
         print("¡Bien hecho! La letra está en la palabra.")
     else:
@@ -61,11 +64,11 @@ while failures < max_failures:
       word_displayed = "".join([letter if letter in guessed_letters else "_" for letter in secret_word])
 
     print(f"Palabra: {word_displayed}")
-    # Verificar si se ha adivinado la palabra completa y no llegó al límite de errores
+
+    # Verificar si se ha adivinado la palabra completa y si no ha alcanzado el límite de errores
     if word_displayed == secret_word and failures < max_failures:
         print(f"¡Felicidades! Has adivinado la palabra secreta: {secret_word}")
         break
 if failures >= max_failures:
     print(f"¡Oh no! Has alcanzado los {max_failures} errores.")
     print(f"La palabra secreta era: {secret_word}")
-
